@@ -8,28 +8,29 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.findpicturepair.R
+import com.example.findpicturepair.databinding.FragmentPlayBinding
 import com.example.findpicturepair.databinding.FragmentStartBinding
 
-class StartFragment : Fragment() {
+class PlayFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentStartBinding.inflate(
+        val binding = FragmentPlayBinding.inflate(
             inflater,
             container,
             false
         )
 
 
-        binding.start.setOnClickListener{
-            findNavController()
-                .navigate(
-                    R.id.action_startFragment_to_playFragment
-                )
-        }
+//        binding.finish.setOnClickListener{
+//            findNavController()
+//                .navigate(
+//                    R.id.action_playFragment_to_finishFragment
+//                )
+//        }
         return binding.root
     }
 }

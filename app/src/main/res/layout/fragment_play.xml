@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dafffb"
+    tools:context=".activity.PlayFragment">
+
+    <GridLayout
+        android:id="@+id/playTable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:rowCount="5"
+        android:columnCount="4">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/circle"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/circle"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/circle"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/circle"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/circle"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/circle"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/circle"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/circle"/>
+
+    </GridLayout>
+
+
+<!--        <Button-->
+<!--            android:id="@+id/finish"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/playTable"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:text="Play"-->
+<!--            />-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

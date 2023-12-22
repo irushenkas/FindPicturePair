@@ -11,7 +11,17 @@
         android:label="fragment_start"
         tools:layout="@layout/fragment_start">
         <action
-            android:id="@+id/action_startFragment_to_finishFragment"
+            android:id="@+id/action_startFragment_to_playFragment"
+            app:destination="@id/playFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/playFragment"
+        android:name="com.example.findpicturepair.activity.PlayFragment"
+        android:label="fragment_play"
+        tools:layout="@layout/fragment_play">
+        <action
+            android:id="@+id/action_playFragment_to_finishFragment"
             app:destination="@id/finishFragment" />
     </fragment>
 
