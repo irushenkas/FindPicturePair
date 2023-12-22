@@ -25,12 +25,12 @@ class PlayFragment : Fragment() {
         )
 
 
-//        binding.finish.setOnClickListener{
-//            findNavController()
-//                .navigate(
-//                    R.id.action_playFragment_to_finishFragment
-//                )
-//        }
+        binding.finish.setOnClickListener{
+            findNavController()
+                .navigate(
+                    R.id.action_playFragment_to_finishFragment
+                )
+        }
         return binding.root
     }
 }

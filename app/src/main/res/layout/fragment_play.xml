@@ -7,75 +7,122 @@
     android:background="#dafffb"
     tools:context=".activity.PlayFragment">
 
-    <GridLayout
-        android:id="@+id/playTable"
+    <TextView
+        android:id="@+id/timer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:rowCount="5"
-        android:columnCount="4">
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:drawableLeft="@drawable/timer"
+        android:drawablePadding="8dp"
+        android:text="00:10"
+        android:textColor="#5ea55c"
+        android:textSize="26sp"
+        android:background="@drawable/corner"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        />
 
-        <ImageView
-            android:layout_width="48dp"
+    <TextView
+        android:id="@+id/money"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:drawableLeft="@drawable/circle"
+        android:drawablePadding="8dp"
+        android:text="100"
+        android:textColor="#5ea55c"
+        android:textSize="26sp"
+        android:background="@drawable/corner"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/playBlock"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <GridLayout
+            android:id="@+id/playTable"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/circle"/>
+            android:columnCount="4"
+            android:rowCount="5">
 
-        <ImageView
-            android:layout_width="48dp"
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/circle" />
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/circle" />
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/circle" />
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/circle" />
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/circle" />
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/circle" />
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/circle" />
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/circle" />
+
+        </GridLayout>
+
+        <Button
+            android:id="@+id/finish"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/playTable"
+            android:layout_marginTop="30dp"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/circle"/>
+            android:layout_width="wrap_content"
+            android:text="Play"
+            />
 
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/circle"/>
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/circle"/>
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/circle"/>
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/circle"/>
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/circle"/>
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/circle"/>
-
-    </GridLayout>
-
-
-<!--        <Button-->
-<!--            android:id="@+id/finish"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/playTable"-->
-<!--            android:layout_marginTop="30dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:text="Play"-->
-<!--            />-->
-
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
