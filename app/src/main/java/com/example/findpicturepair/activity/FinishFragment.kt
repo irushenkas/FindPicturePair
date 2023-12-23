@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.findpicturepair.R
 import com.example.findpicturepair.databinding.FragmentFinishBinding
-import com.example.findpicturepair.databinding.FragmentStartBinding
 
 class FinishFragment : Fragment() {
 
@@ -23,6 +22,7 @@ class FinishFragment : Fragment() {
             false
         )
 
+        binding.result.text = arguments?.getInt("win").toString()
 
         binding.home.setOnClickListener{
             findNavController()

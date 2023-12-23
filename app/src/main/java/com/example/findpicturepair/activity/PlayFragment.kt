@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.findpicturepair.R
 import com.example.findpicturepair.databinding.FragmentPlayBinding
+import com.example.findpicturepair.game.Money
 import com.example.findpicturepair.game.PictureGrid
-
 
 class PlayFragment : Fragment() {
     override fun onCreateView(
@@ -104,9 +104,14 @@ class PlayFragment : Fragment() {
                 }
 
                 if(pictureGrid.isFinished()) {
+                    val money = Money(23)
+                    val bundle = Bundle()
+                    bundle.putInt("win", money.countMoney())
+
                     findNavController()
                         .navigate(
-                            R.id.action_playFragment_to_finishFragment
+                            R.id.action_playFragment_to_finishFragment,
+                            bundle
                         )
                 }
             }
