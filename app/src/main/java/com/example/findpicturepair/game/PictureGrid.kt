@@ -3,7 +3,7 @@ package com.example.findpicturepair.game
 class PictureGrid(private val cellCount: Int) {
     private val pictureCount: Int = cellCount / 2
     private var items: MutableList<PictureCell> = ArrayList()
-    private var previousCellNumber: Int = -1
+    private var previousCellNumber: Int? = null
 
     fun fillItems() {
         val pictures: MutableList<Int> = ArrayList(cellCount)
@@ -34,6 +34,13 @@ class PictureGrid(private val cellCount: Int) {
         return items[cellNumber].isFound
     }
 
+    fun setCellFound(cellNumber: Int) {
+        if(cellNumber >= cellCount) {
+            return
+        }
+        items[cellNumber].isFound = true
+    }
+
     fun isCellPictureVisible(cellNumber: Int): Boolean? {
         if(cellNumber >= cellCount) {
             return null
@@ -41,30 +48,27 @@ class PictureGrid(private val cellCount: Int) {
         return items[cellNumber].isVisible
     }
 
-    fun setCellPictureVisible(cellNumber: Int) {
-        if(cellNumber >= cellCount) {
-            return
-        }
-
-        if(previousCellNumber == -1) {
-            previousCellNumber = cellNumber
-            items[cellNumber].isVisible = true
-            return
-        }
-
-        if(items[cellNumber].pictureNumber == items[previousCellNumber].pictureNumber) {
-
-        } else {
-            items[cellNumber].isVisible = true
-        }
-        previousCellNumber = cellNumber
-    }
-
     fun setCellPictureVisible(cellNumber: Int, visible: Boolean) {
         if(cellNumber >= cellCount) {
             return
         }
         items[cellNumber].isVisible = visible
+    }
+
+    fun getPreviousNumber(): Int? {
+        return previousCellNumber
+    }
+
+    fun setPreviousNumber(number: Int?) {
+        previousCellNumber = number
+    }
+
+    fun isPairWithPrevious(cellNumber: Int): Boolean {
+        if(cellNumber >= cellCount || previousCellNumber == null) {
+            return false
+        }
+
+        return items[cellNumber].pictureNumber == items[previousCellNumber!!].pictureNumber
     }
 
     fun isFinished(): Boolean {

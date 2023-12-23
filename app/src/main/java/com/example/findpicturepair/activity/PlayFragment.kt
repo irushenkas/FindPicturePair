@@ -1,6 +1,7 @@
 package com.example.findpicturepair.activity
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,6 +36,8 @@ class PlayFragment : Fragment() {
         pictureGrid.fillItems()
 
         val gridLayout = view?.findViewById<GridLayout>(R.id.playTable)
+        var previousView: ImageView? = null
+
         for (i in 0 until cellCount) {
             val imageView = ImageView(this.context)
             imageView.setImageResource(R.drawable.corner_cell)
@@ -44,29 +47,75 @@ class PlayFragment : Fragment() {
             layoutParams.setMargins(10, 10, 10, 10);
             imageView.layoutParams = layoutParams
 
-            imageView.setOnClickListener {view ->
+            imageView.setOnClickListener {v ->
                 val isFound = pictureGrid.isCellFound(i)
                 if(isFound == null || isFound) {
                     return@setOnClickListener
                 }
 
                 val isPictureVisible = pictureGrid.isCellPictureVisible(i)
-                if(isPictureVisible == null) {
+                if(isPictureVisible == null || isPictureVisible) {
                     return@setOnClickListener
                 }
-                if(isPictureVisible) {
-                    imageView.setImageResource(R.drawable.corner_cell)
-                    pictureGrid.setCellPictureVisible(i, false)
-                } else {
-                    val pictureNumber = pictureGrid.getItemPictureNumber(i)
-                    if(pictureNumber != null) {
-                        val drawableId = resources.getIdentifier(
-                            "image$pictureNumber",
-                            "drawable",
-                            this.requireContext().packageName
-                        )
-                        imageView.setImageResource(drawableId)
+
+                val pictureNumber = pictureGrid.getItemPictureNumber(i)
+                if(pictureNumber != null) {
+                    val drawableId = resources.getIdentifier(
+                        "image$pictureNumber",
+                        "drawable",
+                        this.requireContext().packageName
+                    )
+                    imageView.setImageResource(drawableId)
+
+
+                    if(pictureGrid.getPreviousNumber() == null) {
                         pictureGrid.setCellPictureVisible(i, true)
+                        pictureGrid.setPreviousNumber(i)
+                        previousView = imageView
+                        return@setOnClickListener
+                    }
+
+                    if(pictureGrid.isPairWithPrevious(i)) {
+                        pictureGrid.setCellPictureVisible(i, true)
+                        pictureGrid.setCellFound(i)
+
+                        val previousNumber = pictureGrid.getPreviousNumber()
+                        if(previousNumber != null) {
+                            val  previousImageViewResourceId = resources.getIdentifier(
+                                "imageView$previousNumber",
+                                "id",
+                                this.requireContext().packageName
+                            )
+                            val previousImageView: ImageView? = view?.findViewById(previousImageViewResourceId)
+
+                            val previousPictureNumber = pictureGrid.getItemPictureNumber(previousNumber)
+                            if(previousPictureNumber != null) {
+                                val previousDrawableId = resources.getIdentifier(
+                                    "image$previousPictureNumber",
+                                    "drawable",
+                                    this.requireContext().packageName
+                                )
+                                previousImageView?.setImageResource(previousDrawableId)
+                            }
+
+                            pictureGrid.setCellPictureVisible(previousNumber, true)
+                            pictureGrid.setCellFound(previousNumber)
+                        }
+                        pictureGrid.setPreviousNumber(null)
+                        previousView = null
+                    } else {
+                        Handler().postDelayed(Runnable {
+                            imageView.setImageResource(R.drawable.corner_cell)
+                            pictureGrid.setCellPictureVisible(i, false)
+
+                            val previousNumber = pictureGrid.getPreviousNumber()
+                            if(previousNumber != null) {
+                                previousView?.setImageResource(R.drawable.corner_cell)
+                                pictureGrid.setCellPictureVisible(previousNumber, false)
+                            }
+                            pictureGrid.setPreviousNumber(null)
+                            previousView = null
+                        }, 2000)
                     }
                 }
 
