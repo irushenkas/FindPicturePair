@@ -39,13 +39,7 @@ class PlayFragment : Fragment() {
         var previousView: ImageView? = null
 
         for (i in 0 until cellCount) {
-            val imageView = ImageView(this.context)
-            imageView.setImageResource(R.drawable.corner_cell)
-            imageView.adjustViewBounds = true
-
-            val layoutParams = LinearLayout.LayoutParams(170, LinearLayout.LayoutParams.WRAP_CONTENT)
-            layoutParams.setMargins(10, 10, 10, 10);
-            imageView.layoutParams = layoutParams
+            val imageView = createImageView()
 
             imageView.setOnClickListener {v ->
                 val isFound = pictureGrid.isCellFound(i)
@@ -59,64 +53,54 @@ class PlayFragment : Fragment() {
                 }
 
                 val pictureNumber = pictureGrid.getItemPictureNumber(i)
-                if(pictureNumber != null) {
-                    val drawableId = resources.getIdentifier(
-                        "image$pictureNumber",
-                        "drawable",
-                        this.requireContext().packageName
-                    )
-                    imageView.setImageResource(drawableId)
+                if(pictureNumber == null) {
+                    return@setOnClickListener
+                }
+                setImageViewResources(imageView, pictureNumber)
 
+                if(pictureGrid.getPreviousNumber() == null) {
+                    pictureGrid.setCellPictureVisible(i, true)
+                    pictureGrid.setPreviousNumber(i)
+                    previousView = imageView
+                    return@setOnClickListener
+                }
 
-                    if(pictureGrid.getPreviousNumber() == null) {
-                        pictureGrid.setCellPictureVisible(i, true)
-                        pictureGrid.setPreviousNumber(i)
-                        previousView = imageView
+                if(pictureGrid.isPairWithPrevious(i)) {
+                    pictureGrid.setCellPictureVisible(i, true)
+                    pictureGrid.setCellFound(i)
+
+                    val previousNumber = pictureGrid.getPreviousNumber()
+                    if(previousNumber == null) {
                         return@setOnClickListener
                     }
 
-                    if(pictureGrid.isPairWithPrevious(i)) {
-                        pictureGrid.setCellPictureVisible(i, true)
-                        pictureGrid.setCellFound(i)
+                    val previousPictureNumber = pictureGrid.getItemPictureNumber(previousNumber)
+                    if(previousPictureNumber == null) {
+                        return@setOnClickListener
+                    }
+                    if(previousView == null) {
+                        return@setOnClickListener
+                    }
+                    setImageViewResources(previousView, previousPictureNumber)
+
+                    pictureGrid.setCellPictureVisible(previousNumber, true)
+                    pictureGrid.setCellFound(previousNumber)
+
+                    pictureGrid.setPreviousNumber(null)
+                    previousView = null
+                } else {
+                    Handler().postDelayed(Runnable {
+                        imageView.setImageResource(R.drawable.corner_cell)
+                        pictureGrid.setCellPictureVisible(i, false)
 
                         val previousNumber = pictureGrid.getPreviousNumber()
                         if(previousNumber != null) {
-                            val  previousImageViewResourceId = resources.getIdentifier(
-                                "imageView$previousNumber",
-                                "id",
-                                this.requireContext().packageName
-                            )
-                            val previousImageView: ImageView? = view?.findViewById(previousImageViewResourceId)
-
-                            val previousPictureNumber = pictureGrid.getItemPictureNumber(previousNumber)
-                            if(previousPictureNumber != null) {
-                                val previousDrawableId = resources.getIdentifier(
-                                    "image$previousPictureNumber",
-                                    "drawable",
-                                    this.requireContext().packageName
-                                )
-                                previousImageView?.setImageResource(previousDrawableId)
-                            }
-
-                            pictureGrid.setCellPictureVisible(previousNumber, true)
-                            pictureGrid.setCellFound(previousNumber)
+                            previousView?.setImageResource(R.drawable.corner_cell)
+                            pictureGrid.setCellPictureVisible(previousNumber, false)
                         }
                         pictureGrid.setPreviousNumber(null)
                         previousView = null
-                    } else {
-                        Handler().postDelayed(Runnable {
-                            imageView.setImageResource(R.drawable.corner_cell)
-                            pictureGrid.setCellPictureVisible(i, false)
-
-                            val previousNumber = pictureGrid.getPreviousNumber()
-                            if(previousNumber != null) {
-                                previousView?.setImageResource(R.drawable.corner_cell)
-                                pictureGrid.setCellPictureVisible(previousNumber, false)
-                            }
-                            pictureGrid.setPreviousNumber(null)
-                            previousView = null
-                        }, 2000)
-                    }
+                    }, 2000)
                 }
 
                 if(pictureGrid.isFinished()) {
@@ -129,5 +113,26 @@ class PlayFragment : Fragment() {
 
             gridLayout?.addView(imageView)
         }
+    }
+
+    private fun createImageView(): ImageView {
+        val imageView = ImageView(this.context)
+        imageView.setImageResource(R.drawable.corner_cell)
+        imageView.adjustViewBounds = true
+
+        val layoutParams = LinearLayout.LayoutParams(170, LinearLayout.LayoutParams.WRAP_CONTENT)
+        layoutParams.setMargins(10, 10, 10, 10);
+        imageView.layoutParams = layoutParams
+
+        return imageView
+    }
+
+    private fun setImageViewResources(imageView: ImageView?, pictureNumber: Int) {
+        val previousDrawableId = resources.getIdentifier(
+            "image$pictureNumber",
+            "drawable",
+            this.requireContext().packageName
+        )
+        imageView?.setImageResource(previousDrawableId)
     }
 }
