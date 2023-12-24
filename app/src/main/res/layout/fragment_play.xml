@@ -17,7 +17,7 @@
         android:layout_marginLeft="30dp"
         android:drawableLeft="@drawable/timer"
         android:drawablePadding="8dp"
-        android:text="00:10"
+        android:text=""
         android:textColor="#5ea55c"
         android:textSize="26sp"
         android:background="@drawable/corner"

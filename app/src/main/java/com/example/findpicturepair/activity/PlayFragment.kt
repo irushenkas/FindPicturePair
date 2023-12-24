@@ -2,6 +2,7 @@ package com.example.findpicturepair.activity
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,9 @@ import com.example.findpicturepair.game.Money
 import com.example.findpicturepair.game.PictureGrid
 
 class PlayFragment : Fragment() {
+
+    private var seconds = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,6 +30,18 @@ class PlayFragment : Fragment() {
             container,
             false
         )
+
+        val mainHandler = Handler(Looper.getMainLooper())
+
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                activity?.runOnUiThread {
+                    binding.timer.text = seconds.toString()
+                    seconds++
+                }
+                mainHandler.postDelayed(this, 1000)
+            }
+        })
 
         return binding.root
     }
@@ -100,11 +116,11 @@ class PlayFragment : Fragment() {
                         }
                         pictureGrid.setPreviousNumber(null)
                         previousView = null
-                    }, 2000)
+                    }, 1000)
                 }
 
                 if(pictureGrid.isFinished()) {
-                    val money = Money(23)
+                    val money = Money(seconds)
                     val bundle = Bundle()
                     bundle.putInt("win", money.countMoney())
 
