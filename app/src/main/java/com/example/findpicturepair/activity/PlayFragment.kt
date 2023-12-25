@@ -36,7 +36,7 @@ class PlayFragment : Fragment() {
         mainHandler.post(object : Runnable {
             override fun run() {
                 activity?.runOnUiThread {
-                    binding.timer.text = seconds.toString()
+                    binding.timer.text = secondsToTime(seconds)
                     seconds++
                 }
                 mainHandler.postDelayed(this, 1000)
@@ -44,6 +44,12 @@ class PlayFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    fun secondsToTime(secondsAll: Int): String {
+        val minutes = secondsAll / 60
+        val seconds = secondsAll % 60
+        return String.format("%02d:%02d", minutes, seconds)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -116,7 +122,7 @@ class PlayFragment : Fragment() {
                         }
                         pictureGrid.setPreviousNumber(null)
                         previousView = null
-                    }, 1000)
+                    }, 500)
                 }
 
                 if(pictureGrid.isFinished()) {
