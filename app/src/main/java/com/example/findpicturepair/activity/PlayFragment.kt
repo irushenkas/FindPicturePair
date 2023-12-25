@@ -37,10 +37,11 @@ class PlayFragment : Fragment() {
             override fun run() {
                 activity?.runOnUiThread {
                     binding.timer.text = secondsToTime(seconds)
-                    seconds++
 
                     val money = Money(seconds)
                     binding.money.text = money.countMoney().toString()
+
+                    seconds++
 
                 }
                 mainHandler.postDelayed(this, 1000)
@@ -126,7 +127,7 @@ class PlayFragment : Fragment() {
                         }
                         pictureGrid.setPreviousNumber(null)
                         previousView = null
-                    }, 500)
+                    }, 300)
                 }
 
                 if(pictureGrid.isFinished()) {
