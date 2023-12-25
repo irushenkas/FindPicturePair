@@ -38,6 +38,10 @@ class PlayFragment : Fragment() {
                 activity?.runOnUiThread {
                     binding.timer.text = secondsToTime(seconds)
                     seconds++
+
+                    val money = Money(seconds)
+                    binding.money.text = money.countMoney().toString()
+
                 }
                 mainHandler.postDelayed(this, 1000)
             }

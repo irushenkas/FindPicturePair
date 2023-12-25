@@ -37,7 +37,7 @@
         android:layout_marginRight="30dp"
         android:drawableLeft="@drawable/circle"
         android:drawablePadding="8dp"
-        android:text="100"
+        android:text=""
         android:textColor="#5ea55c"
         android:textSize="26sp"
         android:background="@drawable/corner"

@@ -47,7 +47,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@drawable/logo"
-            android:contentDescription="sdfdsfd"
+            android:contentDescription="Logo"
             />
 
         <Button
@@ -68,7 +68,7 @@
             android:layout_height="58dp"
             android:layout_gravity="right"
             android:src="@drawable/privacy"
-            android:contentDescription="sdfdsfd"
+            android:contentDescription="Privacy"
             />
 
     </LinearLayout>
